@@ -3,14 +3,15 @@ import personService from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-
+import Notification from './components/Notifications'
 
 const App = () => {
 
-  const [persons, setPersons] = useState([])
+  const [persons, setPersons] = useState(null)
   const [newName, setNewName] = useState('')
   const [filterName, setFilterName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [notifyMessage, setNotifyMessage] = useState(null)
 
   const hook = () => {
     personService.getAll()
@@ -20,6 +21,9 @@ const App = () => {
     )
   }
   useEffect(hook, [])
+  if (!persons) { 
+    return null 
+  }
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -35,8 +39,25 @@ const App = () => {
           .then(responseData => {
             setPersons(persons.map(person => 
                 person.id === responseData.id ? responseData : person))
+            setNotifyMessage({message: `Added ${newName}`, type: 'success'})
+            setTimeout(() => {
+                      setNotifyMessage(null)
+                    }, 5000)
             setNewName('')
             setNewNumber('')
+          }
+        ).catch(error => {
+            console.log(error)
+            if(error.response?.status === 404) {
+              setNotifyMessage(
+                {message: `Information of ${newName} has already been removed from server`, 
+                type: 'failure'}
+              )
+              setTimeout(() => {
+                setNotifyMessage(null)
+              }, 5000)
+              setPersons(persons.filter(person => person.name != newName))
+            }
           }
         )
       }
@@ -44,12 +65,23 @@ const App = () => {
     }
     personService.create(newPerson)
       .then(responseData => {
-        setPersons(persons.concat(responseData))
-        setNewName('')
-        setNewNumber('')
-      }
-      )
+          setPersons(persons.concat(responseData))
+          setNotifyMessage({message: `Added ${newName}`, type: 'success'})
+          setTimeout( () => {
+                    setNotifyMessage(null)
+                  }, 5000)
+          setNewName('')
+          setNewNumber('')
+        }
+      ).catch(error => {
+            console.log(error)
+            if(error.response?.status === 404) {
+              alert('Something went wrong')
+            } else {
 
+            }
+          }
+        )
   }
 
   const handleNameInput = (event) => {
@@ -72,6 +104,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notifyMessage}/>
       <Filter 
         filterName={filterName}
         handleFilterInput={handleFilterInput}

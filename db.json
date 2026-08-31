@@ -29,11 +29,6 @@
       "id": "-Bu-daax1Vg",
       "content": "123",
       "important": true
-    },
-    {
-      "id": "5cHPEqZbiWc",
-      "content": "4124321",
-      "important": true
     }
   ],
   "persons": [
@@ -58,14 +53,19 @@
       "id": "4"
     },
     {
-      "name": "abc",
-      "number": "123",
-      "id": "bi2abflZ4Y0"
-    },
-    {
       "name": "def",
       "number": "456",
       "id": "8ylZrLNIqlI"
+    },
+    {
+      "name": "ghi",
+      "number": "789",
+      "id": "qlJIt1uMZwk"
+    },
+    {
+      "name": "abc",
+      "number": "123",
+      "id": "XC9p3xswflE"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
