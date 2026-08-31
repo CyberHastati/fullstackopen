@@ -37,10 +37,10 @@ const App = () => {
                 person.id === responseData.id ? responseData : person))
             setNewName('')
             setNewNumber('')
+          }
+        )
       }
-      )
-        return
-      }
+      return
     }
     personService.create(newPerson)
       .then(responseData => {
