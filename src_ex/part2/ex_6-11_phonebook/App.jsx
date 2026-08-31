@@ -1,22 +1,30 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 
-const initialPersonsData = [
-    { name: 'Arto Hellas', number: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-  ]
-
 
 const App = () => {
-  const [persons, setPersons] = useState(initialPersonsData)
+
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [filterName, setFilterName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [newId, setNewId] = useState(persons.length+1)
+  const [newId, setNewId] = useState(1)
+
+  const hook = () => {
+    const url = 'http://localhost:3001/persons'
+    console.log('read initial persons from db')
+    axios
+      .get(url)
+      .then(response => {
+        setPersons(response.data)
+        setNewId(newId+response.data.length)
+      }
+    )
+  }
+  useEffect(hook, [])
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -53,6 +61,7 @@ const App = () => {
         filterName={filterName}
         handleFilterInput={handleFilterInput}
       />
+      <h2>add a new</h2>
       <PersonForm 
         newName={newName}
         newNumber={newNumber}
