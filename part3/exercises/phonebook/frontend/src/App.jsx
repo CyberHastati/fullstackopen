@@ -47,19 +47,20 @@ const App = () => {
             setNewNumber('')
           }
         ).catch(error => {
-            console.log(error)
-            if(error.response?.status === 404) {
-              setNotifyMessage(
-                {message: `Information of ${newName} has already been removed from server`, 
-                type: 'failure'}
-              )
-              setTimeout(() => {
-                setNotifyMessage(null)
-              }, 5000)
-              setPersons(persons.filter(person => person.name != newName))
-            }
+          console.log(error)
+          const message = error.response?.status === 404
+            ? `Information of ${newName} has already been removed from server`
+            : error.response?.data?.error ?? 'Something went wrong'
+
+          setNotifyMessage({ message, type: 'failure' })
+          setTimeout(() => {
+            setNotifyMessage(null)
+          }, 5000)
+
+          if (error.response?.status === 404) {
+            setPersons(persons.filter(person => person.name !== newName))
           }
-        )
+        })
       }
       return
     }
@@ -74,12 +75,12 @@ const App = () => {
           setNewNumber('')
         }
       ).catch(error => {
-            console.log(error)
-            if(error.response?.status === 404) {
-              alert('Something went wrong')
-            } 
-          }
-        )
+            console.log(error.response.data.error)
+            setNotifyMessage({message: `${error.response.data.error}`, type: 'failure'})
+            setTimeout(() => {
+                      setNotifyMessage(null)
+                    }, 5000)
+          })
   }
 
   const handleNameInput = (event) => {
@@ -94,7 +95,7 @@ const App = () => {
   const handlePersonDelete = (delperson) => {
     const result = window.confirm(`Delete ${delperson.name}?`)
     if (result) personService.del(delperson.id).then(() => {
-      setPersons(persons.filter(person => person.id != delperson.id))
+      setPersons(persons.filter(person => person.id !== delperson.id))
     })
   }
   
