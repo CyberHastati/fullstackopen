@@ -2,8 +2,13 @@
 logs
 *.log
 
+# env
 node_modules
+.env
+
+# build
 dist
+
 
 # Editor directories and files
 .vscode/*
