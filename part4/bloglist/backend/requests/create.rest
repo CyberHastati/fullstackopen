@@ -1,0 +1,18 @@
+POST http://localhost:3003/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Go To Statement Considered Harmful",
+    "author": "Edsger W. Dijkstra",
+    "url": "https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf",
+    "likes": 5
+}
+
+### wrong scheme
+# POST http://localhost:3003/api/blogs/ HTTP/1.1
+# content-type: application/json
+
+# {
+#     "important": false,
+#     "content": "lol"
+# }

@@ -1,0 +1,10 @@
+
+### Get one by ID
+GET http://localhost:3003/api/blogs/6a983fa0d1c8b998306e4e1f
+
+### Get one by non exist ID
+GET http://localhost:3003/api/blogs/6a983fa0d1c8b998306e4e1e
+
+### Get one by wrong ID (id is 0x)
+GET http://localhost:3003/api/blogs/6a9843238bf537fa1fac8bfq
+
