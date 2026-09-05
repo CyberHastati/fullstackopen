@@ -24,7 +24,7 @@ const favoriteBlog = (blogs) => {
   return blogs.reduce(max, blogs[0])
 }
 
-const mostBlogs  = (blogs) => {
+const mostBlogs = (blogs) => {
   if (blogs.length === 0) {
     return null
   }
