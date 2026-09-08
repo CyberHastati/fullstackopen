@@ -34,7 +34,6 @@ const tokenExtractor = request => {
   // code that extracts the token
   const authorization = request.get('authorization')
   if (authorization && authorization.startsWith('Bearer ')) {
-    console.log('here');
     return authorization.replace('Bearer ', '')
   } else {
     return null
