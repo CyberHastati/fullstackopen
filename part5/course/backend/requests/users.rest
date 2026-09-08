@@ -1,0 +1,26 @@
+### GET
+### Get all users
+GET http://localhost:3001/api/users/
+### Get one by ID
+GET http://localhost:3001/api/users/6a983fa0d1c8b998306e4e1f
+
+### POST
+### POST ROOT
+POST http://localhost:3001/api/users/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "root",
+    "name": "Superuser",
+    "password": "salainen"
+}
+### POST OTHER
+POST http://localhost:3001/api/users/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "mluukkai",
+    "name": "Matti Luukkainen",
+    "password": "mluukkai"
+}
+
