@@ -26,12 +26,12 @@ const LoginForm = (props) => (
 )
 
 const LoginStatus = (props) => (
-    <div>
-      <label>
-        {props.name} logged in
-        <button onClick={props.onClick}>logout</button>
-      </label>
-    </div>
+  <div>
+    <label>
+      {props.name} logged in
+      <button onClick={props.onClick}>logout</button>
+    </label>
+  </div>
 )
 
 // const BLogForm = (props) => (
