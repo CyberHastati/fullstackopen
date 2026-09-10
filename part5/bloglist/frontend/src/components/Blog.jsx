@@ -72,6 +72,7 @@ const CreateBlog = ({ handleCreateBlog }) => {
             type="text"
             value={createTitle}
             onChange={({ target }) => setCreateTitle(target.value)}
+            placeholder='write blog title here'
           />
         </label>
       </div>
@@ -82,6 +83,7 @@ const CreateBlog = ({ handleCreateBlog }) => {
             type="text"
             value={createAuthor}
             onChange={({ target }) => setCreateAuthor(target.value)}
+            placeholder='write blog author here'
           />
         </label>
       </div>
@@ -92,6 +94,7 @@ const CreateBlog = ({ handleCreateBlog }) => {
             type="url"
             value={createUrl}
             onChange={({ target }) => setCreateUrl(target.value)}
+            placeholder='write blog url here'
           />
         </label>
       </div>
