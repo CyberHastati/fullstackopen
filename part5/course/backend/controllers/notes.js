@@ -21,8 +21,8 @@ notesRouter.get('/:id', async (request, response) => {
 const getTokenFrom = request => {
   const authorization = request.get('authorization')
   if (authorization && authorization.startsWith('Bearer ')) {
-      return authorization.replace('Bearer ', '')
-    }
+    return authorization.replace('Bearer ', '')
+  }
   return null
 }
 

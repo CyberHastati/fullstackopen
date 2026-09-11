@@ -40,13 +40,14 @@ const LoginForm = ({
     )
   }
 
-const NoteForm = ({ createNote }) => {
+const NoteForm = ({ createNote, user }) => {
   const [newNote, setNewNote] = useState('')
   const addNote = (event) => {
     event.preventDefault()
     createNote({
       content: newNote,
-      important: true
+      important: true,
+      user: user
     })
 
     setNewNote('')
