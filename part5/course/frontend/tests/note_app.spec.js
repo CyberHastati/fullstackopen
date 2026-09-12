@@ -62,25 +62,19 @@ test.describe('Note app', () => {
       test.beforeEach(async ({ page }) => {
         await createNote({page, content: 'first note'})
         await createNote({page, content: 'second note'})
+        await createNote({page, content: 'third note'})
       })
 
-      test('one of those can be made nonimportant', async ({ page }) => {
-        const otherNoteElement = page.getByText('first note')
+    test('one of those can be made nonimportant', async ({ page }) => {
+      await page.pause()
+      const otherNoteText = page.getByText('first note')
+      const otherNoteElement = otherNoteText.locator('..')
 
-        await otherNoteElement
-          .getByRole('button', {name: 'make not important'}).click()
-        await expect(page.getByText('first note')
-          .getByText('make important')).toBeVisible()
-        await expect(page.getByText('first note')
-          .getByRole('button', {name: 'make important'})).toBeVisible()
-      })
-      // test('one of those can be made nonimportant', async ({ page }) => {
-      //   page.getByText('first note')
-      //     .getByRole('button', { name: 'make not important' }).click()
+      await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+      await expect(otherNoteElement.getByText('make important')).toBeVisible()
+    })
 
-      //   await expect(page.getByText('first note').getByText('make important'))
-      //     .toBeVisible()
-      // })
+
     })
   })
 })
